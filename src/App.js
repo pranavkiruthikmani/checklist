@@ -1,13 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [checkbox, setCheckbox] = useState([]);
+  const [textfield, setTextfield] = useState('');
+
+  const updateArray = () => {
+     setCheckbox([...checkbox, {textfield}]);
+     setTextfield('');
+  }
+
+  useEffect(() => {
+    console.log(checkbox);
+  }, [checkbox])
+
   return (
     <div> 
-      <label for="vehicle1">
-        <input type='checkbox' id='cb1' name='box1' value='helloworld' color='black'/>
-        Hello World
-      </label>
+      <input type='text' id='textinput' name='textinput' value={textfield} onChange={(e) => setTextfield(e.target.value)}/>
+      <button onClick={updateArray}>
+        Add Reminder
+      </button>
+      <div>
+        {checkbox.map((current, index) => {
+          return(
+            <div>
+              <input type='checkbox' id='index' name='index' value={current}/>
+              <label htmlFor='index'>{current.textfield}</label>
+            </div>
+          )})}
+      </div>
     </div>
   );
 }
