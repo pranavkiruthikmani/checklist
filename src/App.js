@@ -21,17 +21,18 @@ function App() {
   return (
     <div>
       <div className='textbox'>
-        <input type='text' className='textinput' name='textinput' value={textfield} onChange={(e) => setTextfield(e.target.value)}/>
-        <button onClick={updateArray} className='addbutton'>
+        <input type='text' className='form__field' name='textinput' value={textfield} onChange={(e) => setTextfield(e.target.value)}/>
+        <button onClick={updateArray} className='button-30'>
           Add Reminder
         </button>
       </div> 
         <div className='valuelist'>
           {checkbox.map((current, index) => {
+            const key = current.textfield - index;
             return(
-              <div>
-                <input type='checkbox' id='index' name='index' value={current}/>
-                <label htmlFor='index'>{current.textfield}</label>
+              <div key={key}>
+                <input className='checkbox' type='checkbox' id='index' name='index' value={current}/>
+                <label htmlFor='index' className='checkboxlabel'>{current.textfield}</label>
               </div>
             )})}
         </div>
