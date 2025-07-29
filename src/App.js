@@ -7,8 +7,11 @@ function App() {
   const [textfield, setTextfield] = useState('');
 
   const updateArray = () => {
-     setCheckbox([...checkbox, {textfield}]);
-     setTextfield('');
+    if (textfield !== "") {
+      setCheckbox([...checkbox, {textfield}]);
+      setTextfield('');
+    }
+     
   }
 
   useEffect(() => {
@@ -16,20 +19,22 @@ function App() {
   }, [checkbox])
 
   return (
-    <div> 
-      <input type='text' id='textinput' name='textinput' value={textfield} onChange={(e) => setTextfield(e.target.value)}/>
-      <button onClick={updateArray}>
-        Add Reminder
-      </button>
-      <div>
-        {checkbox.map((current, index) => {
-          return(
-            <div>
-              <input type='checkbox' id='index' name='index' value={current}/>
-              <label htmlFor='index'>{current.textfield}</label>
-            </div>
-          )})}
-      </div>
+    <div>
+      <div className='textbox'>
+        <input type='text' className='textinput' name='textinput' value={textfield} onChange={(e) => setTextfield(e.target.value)}/>
+        <button onClick={updateArray} className='addbutton'>
+          Add Reminder
+        </button>
+      </div> 
+        <div className='valuelist'>
+          {checkbox.map((current, index) => {
+            return(
+              <div>
+                <input type='checkbox' id='index' name='index' value={current}/>
+                <label htmlFor='index'>{current.textfield}</label>
+              </div>
+            )})}
+        </div>
     </div>
   );
 }
