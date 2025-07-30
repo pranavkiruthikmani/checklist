@@ -57,6 +57,8 @@ body {
 }
 
 .textbox {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +80,6 @@ body {
 .valuelist {
   display: flex;
   flex-direction: column;
-  align-items: left;
   padding: 10px;
   font-family: "JetBrains Mono",monospace;
   color: #0ef3ff;
@@ -111,7 +112,6 @@ body {
 }
 
 .form__field:focus {
-  border: 0;
   border-bottom: 2px solid #0ef3ff;
 }
 
@@ -143,7 +143,7 @@ body {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .button-30:focus {
