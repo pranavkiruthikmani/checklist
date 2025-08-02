@@ -1,11 +1,15 @@
-  import './checkbox.css';
-  import { useEffect, useState } from 'react';
+import './checkbox.css';
+import { useEffect, useState } from 'react';
+import { auth } from '../../firebase/firebase';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
   function Checkbox() {
 
     const [checkbox, setCheckbox] = useState([]);
     const [textfield, setTextfield] = useState('');
     const [started, setStarted] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
     const localvalues = JSON.parse(localStorage.getItem('checkbox'));
@@ -14,6 +18,16 @@
       setStarted(true);
     }
     }, [])
+
+    const logOut = async () => {
+      try {
+        await signOut(auth);
+        navigate('/signin')
+        console.log("Signed out")
+      } catch (error) {
+        console.error("Error signing out", error)
+      }
+    }
 
     const updateArray = () => {
       if (textfield.trim() !== "") {
@@ -49,6 +63,9 @@
           </button>
           <button onClick={clearArray} className='button-30'>
             Clear
+          </button>
+          <button onClick={logOut} className='button-30'>
+            Sign Out
           </button>
         </div> 
           <div className='valuelist'>

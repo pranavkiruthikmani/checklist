@@ -1,11 +1,11 @@
 import { auth } from '../../firebase/firebase';
 import {React, useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {  signInWithEmailAndPassword  } from 'firebase/auth';
 import validator from "validator";
-import './signup.css';
+import './signin.css';
 
-const SignUp = () => {
+const SignIn = () => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -14,18 +14,19 @@ const SignUp = () => {
     const [passwordvalid, setPasswordvalid] = useState(true);
     const [failed, setFailed] = useState(false)
 
-    const onSignUp = async (e) => {
+
+    const onSignIn = (e) => {
         e.preventDefault();
 
-        console.log("Signup")
+        console.log("Signin")
 
         if (validator.isEmail(email)) {
             setEmailvalid(true);
             if (password.length > 5) {
                 setPasswordvalid(true);
-                await createUserWithEmailAndPassword(auth, email, password)
+                signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    //Signed up
+                    //Signed in
                     console.log(userCredential.user);
                     navigate('/checkbox')
                 })
@@ -44,10 +45,10 @@ const SignUp = () => {
     return(
         <div>
             <div className='container'>
-                <h1>Sign Up</h1>
+                <h1>Sign In</h1>
                 {!emailvalid && <div className='errormessage'>Invalid Email</div>}
                 {!passwordvalid && <div className='errormessage'>Invalid Password: Atleast 6 characters long</div>}
-                {failed && <div className='errormessage'>Failed to sign up</div>}
+                {failed && <div className='errormessage'>Failed to sign in</div>}
                 <div className='inputcontainer'>                    
                     <input type='text' placeholder='Enter Email' name='email' onChange={(e) => setEmail(e.target.value)} className='form__field' />
                 </div>
@@ -56,14 +57,14 @@ const SignUp = () => {
                     <input type='password' placeholder='Enter Password' name='password' onChange={(e) => setPassword(e.target.value)} className='form__field' />
                 </div>                
                 <div>
-                    <button onClick={onSignUp} className='button-31'> Sign Up </button>
+                    <button onClick={onSignIn} className='button-31'> Sign In </button>
                 </div>
                 <div>
-                    <Link to='/signin' className='link'>Sign In</Link>
+                    <Link to='/signup' className='link'>Sign Up</Link>
                 </div>
             </div>
         </div>
     )
 }
 
-export default SignUp;
+export default SignIn;

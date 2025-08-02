@@ -40,11 +40,6 @@ body {
   background-color: #030D22;
 }
 
-.link {
-  font-family: "JetBrains Mono",monospace;
-  color: red;
-}
-
 .errormessage {
   font-family: "JetBrains Mono",monospace;
   color: red;
@@ -200,4 +195,9 @@ body {
 .button-31:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+h1 {
+    font-family: "JetBrains Mono", monospace;
+    color: #fd21e2;
 }
