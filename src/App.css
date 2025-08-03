@@ -159,3 +159,34 @@ body {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  white-space: pre;
+  font-size: 60px;
+  line-height: 2em;
+  height: 2em;
+  overflow: hidden;
+  color: #fd21e2;
+}
+.loader:before {
+  content:"Loading...\AgodnLai...\Aoiaglni...\ALiongad...\Agindola...\Analoidg...";
+  white-space: pre;
+  display:inline-block;
+  animation: l38 1s infinite steps(6);
+}
+
+@keyframes l38 {
+  100%{transform: translateY(-100%)}
+}
+
+.loadercontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}

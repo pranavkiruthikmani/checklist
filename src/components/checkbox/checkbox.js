@@ -11,7 +11,7 @@ import { ref, set, onValue } from 'firebase/database';
     const [checkbox, setCheckbox] = useState([]);
     const [textfield, setTextfield] = useState('');
     const [started, setStarted] = useState(false);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,6 +22,7 @@ import { ref, set, onValue } from 'firebase/database';
         if (datavalues && !started) {
           setCheckbox(datavalues);
           setStarted(true);
+          setLoading(false);
         }
       })
     }, [])
@@ -91,6 +92,11 @@ import { ref, set, onValue } from 'firebase/database';
             Sign Out
           </button>
         </div> 
+        {loading ? (
+          <div className='loadercontainer'> 
+            <div class="loader"></div>
+          </div>
+         ) : (
           <div className='valuelist'>
             {checkbox.map((current, index) => {
               const key = current.id;
@@ -99,8 +105,11 @@ import { ref, set, onValue } from 'firebase/database';
                   <input className='checkbox' type='checkbox' id={key} name={key} value={current.text} checked={current.completed} onChange={(e) => handleCompleted(e, current)} />
                   <label htmlFor={key} className={current.completed ? 'checkboxcompleted' : 'checkboxlabel'}>{current.text}</label>
                 </div>
-              )})}
-          </div>
+              )
+            }
+          )
+        }
+          </div>)}          
       </div>
     );
   }

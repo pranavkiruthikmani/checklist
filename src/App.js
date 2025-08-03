@@ -37,7 +37,11 @@ function App() {
     </BrowserRouter>
     )
   } else {
-    <h1>Loading...</h1>
+    return (
+      <div className='loadercontainer'> 
+        <div class="loader"></div>
+      </div>
+    )
   }
 }
 
