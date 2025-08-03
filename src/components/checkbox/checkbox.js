@@ -23,6 +23,10 @@ import { ref, set, onValue } from 'firebase/database';
           setCheckbox(datavalues);
           setStarted(true);
           setLoading(false);
+        } else {
+          setStarted(true);
+          setLoading(false);
+          setCheckbox([]);
         }
       })
     }, [])
