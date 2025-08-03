@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,11 +14,14 @@ const firebaseConfig = {
   storageBucket: "todolistapp-ee301.firebasestorage.app",
   messagingSenderId: "458128323489",
   appId: "1:458128323489:web:961d55d7f1991869fa91e0",
-  measurementId: "G-7YZRJWS97F"
+  measurementId: "G-7YZRJWS97F",
+  databaseURL: "https://todolistapp-ee301-default-rtdb.asia-southeast1.firebasedatabase.app"
+
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const database = getDatabase(app);
 export const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence)
   .then(() => {

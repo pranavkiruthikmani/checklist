@@ -3,20 +3,27 @@ import { useEffect, useState } from 'react';
 import { auth } from '../../firebase/firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { database } from '../../firebase/firebase';
+import { ref, set, onValue } from 'firebase/database';
 
   function Checkbox() {
 
     const [checkbox, setCheckbox] = useState([]);
     const [textfield, setTextfield] = useState('');
     const [started, setStarted] = useState(false);
+    // const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-    const localvalues = JSON.parse(localStorage.getItem('checkbox'));
-    if (localvalues) {
-      setCheckbox(localvalues);
-      setStarted(true);
-    }
+      const dbRef = ref(database, 'array');
+      onValue(dbRef, (snapshot) => {
+        const datavalues = snapshot.val();
+        console.log(datavalues)
+        if (datavalues && !started) {
+          setCheckbox(datavalues);
+          setStarted(true);
+        }
+      })
     }, [])
 
     const logOut = async () => {
@@ -44,7 +51,8 @@ import { useNavigate } from 'react-router-dom';
     const clearArray = () => {
       if (checkbox.length > 0) {
         setCheckbox([])
-        localStorage.clear();
+        // localStorage.clear();
+        //Clear firebase database
       }
     }
 
@@ -61,9 +69,12 @@ import { useNavigate } from 'react-router-dom';
 
     useEffect(() => {
       if (started === true) {
-        localStorage.setItem('checkbox', JSON.stringify(checkbox));
+        // localStorage.setItem('checkbox', JSON.stringify(checkbox));
+        //Send data to firebase
+        const dbRef = ref(database, 'array');
+        set(dbRef, checkbox)
       }    
-      console.log(JSON.parse(localStorage.getItem('checkbox')));
+      // console.log(JSON.parse(localStorage.getItem('checkbox')));
     }, [checkbox, started])
 
     return (

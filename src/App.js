@@ -17,6 +17,7 @@ function App() {
       console.log("Logged in user")
       setLogged(true)
       setLoadingState(false)
+      console.log("Finished loading")
     } else {
       console.log("No logged in user")
       setLoadingState(false)
