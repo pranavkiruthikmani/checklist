@@ -54,6 +54,10 @@ body {
   accent-color: #fd21e2;
 }
 
+.checkboxcompleted {
+  text-decoration: line-through;
+}
+
 .checkboxlabel {
   animation-duration: 0.7s;
   animation-name: bounceIn;
