@@ -13,9 +13,10 @@ import { ref, set, onValue } from 'firebase/database';
     const [started, setStarted] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const userID = auth.currentUser.uid;
 
     useEffect(() => {
-      const dbRef = ref(database, 'array');
+      const dbRef = ref(database, 'array/' + userID);
       onValue(dbRef, (snapshot) => {
         const datavalues = snapshot.val();
         console.log(datavalues)
@@ -76,7 +77,7 @@ import { ref, set, onValue } from 'firebase/database';
       if (started === true) {
         // localStorage.setItem('checkbox', JSON.stringify(checkbox));
         //Send data to firebase
-        const dbRef = ref(database, 'array');
+        const dbRef = ref(database, 'array/' + userID);
         set(dbRef, checkbox)
       }    
       // console.log(JSON.parse(localStorage.getItem('checkbox')));
