@@ -48,7 +48,7 @@ const SignIn = () => {
                 <h1>Sign In</h1>
                 {!emailvalid && <div className='errormessage'>Invalid Email</div>}
                 {!passwordvalid && <div className='errormessage'>Invalid Password: Atleast 6 characters long</div>}
-                {failed && <div className='errormessage'>Failed to sign in</div>}
+                {failed && <div className='errormessage'>Check your credentials</div>}
                 <div className='inputcontainer'>                    
                     <input type='text' placeholder='Enter Email' name='email' onChange={(e) => setEmail(e.target.value)} className='form__field' />
                 </div>
