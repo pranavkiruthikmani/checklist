@@ -12,7 +12,8 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [emailvalid, setEmailvalid] = useState(true);
     const [passwordvalid, setPasswordvalid] = useState(true);
-    const [failed, setFailed] = useState(false)
+    const [failed, setFailed] = useState(false);
+    const [inUse, setInUse] = useState(false);
 
     const onSignUp = async (e) => {
         e.preventDefault();
@@ -30,6 +31,11 @@ const SignUp = () => {
                     navigate('/checkbox')
                 })
                 .catch((error) => {
+                    const code = error.code;
+                    if (code === 'auth/email-already-in-use') {
+                        setInUse(true);
+                    }
+
                     setFailed(true)
                     console.log(error);
                 })
@@ -48,6 +54,7 @@ const SignUp = () => {
                 {!emailvalid && <div className='errormessage'>Invalid Email</div>}
                 {!passwordvalid && <div className='errormessage'>Invalid Password: Atleast 6 characters long</div>}
                 {failed && <div className='errormessage'>Failed to sign up</div>}
+                {inUse && <div className='errormessage'>Email in use</div>}
                 <div className='inputcontainer'>                    
                     <input type='text' placeholder='Enter Email' name='email' onChange={(e) => setEmail(e.target.value)} className='form__field' />
                 </div>
