@@ -26,7 +26,7 @@ function App() {
 
   if (!loadingState) {
     return(
-    <BrowserRouter>
+    <BrowserRouter basename="/checklist">
       <Routes>
         {/* <Route index element={<SignIn />} /> */}
         {logged ? <Route index element={<Checkbox />} /> : <Route index element={<SignIn />} />}
